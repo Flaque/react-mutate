@@ -2,6 +2,21 @@
 
 React Mutate is a simple little tool to help write extensions (or mutations) for individual react components.
 
+## Install
+
+### With yarn
+
+``` sh
+$ yarn add react-mutate
+```
+
+### With npm
+
+``` sh
+$ npm install --save react-mutate
+```
+
+## Example 
 The general model looks something like this:
 
 ``` js 
