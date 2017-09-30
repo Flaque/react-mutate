@@ -1,0 +1,27 @@
+{
+  "name": "react-mutate",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-watch": "./node_modules/.bin/jest --watchAll"
+  },
+  "dependencies": {
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "jest": "^21.2.1",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0"
+  }
+}
