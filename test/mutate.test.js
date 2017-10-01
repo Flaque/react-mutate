@@ -19,7 +19,9 @@ describe("mutate", () => {
   });
 
   it("will return a different component if that's available", () => {
-    const MutatedComponent = () => <p>mutate</p>;
+    const MutatedComponent = () => {
+      return () => <p>mutate</p>;
+    };
     const Component = mutate(FakeComponent, {
       FakeComponent: MutatedComponent
     });
@@ -39,10 +41,17 @@ describe("mutate", () => {
     };
 
     const Component = mutate(Base, {
-      Base: withMutation(Base)
+      Base: withMutation
     });
     const wrapper = shallow(<Component />);
 
     expect(wrapper.html()).toBe("<p>hi</p>");
+  });
+
+  it("will throw an error if there's no mutations", () => {
+    expect(() => {
+      const Component = mutate(<div> hi </div>);
+      shallow(<Component />);
+    }).toThrowError();
   });
 });
