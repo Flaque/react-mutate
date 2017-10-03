@@ -1,4 +1,6 @@
-# react-mutate
+<p align="center">
+  <img src="https://i.imgur.com/003JozN.png" />
+</p>
 
 React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The main use case is to allow end-users the ability to write and add extensions to a React application. 
 
