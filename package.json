@@ -1,14 +1,34 @@
 {
   "name": "react-mutate",
   "version": "0.2.0",
-  "main": "build/index.js",
-  "license": "MIT",
+  "main": "index.js",
+  "description":
+    "Easily add user-defined extensions into your react application",
+  "repository": "https://github.com/Flaque/react-mutate.git",
+  "author": "@flaque",
   "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "test-watch": "./node_modules/.bin/jest --watchAll",
-    "build": "make build SRC=./src",
-    "prepublish": "make build SRC=./src"
+    "test": "lerna exec npm install && jest",
+    "test-watch": "lerna exec npm install && jest --watch",
+    "prepare-release":
+      "git checkout master && git pull --rebase origin master && lerna updated",
+    "release": "npm run prepare-release && lerna publish --exact"
   },
+  "license": "MIT",
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "coveragePathIgnorePatterns": ["/node_modules/", "/build/"],
+    "testPathIgnorePatterns": ["/node_modules/", "/build/"],
+    "coverageReporters": ["text", "lcov"]
+  },
+  "keywords": [
+    "react",
+    "extensions",
+    "extension",
+    "mutate",
+    "plugin",
+    "plugins"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -20,35 +40,9 @@
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "jest": "^21.2.1",
+    "lerna": "^2.3.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-fatigue-dev": "tj/react-fatigue-dev",
     "react-test-renderer": "^16.0.0"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.0.0-0 || ^16.0.0-0",
-    "react": "^15.0.0-0 || ^16.0.0-0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Flaque/react-mutate.git"
-  },
-  "homepage": "https://github.com/Flaque/react-mutate#readme",
-  "bugs": {
-    "url": "https://github.com/Flaque/react-mutate/issues"
-  },
-  "files": ["build"],
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/coverage",
-    "coveragePathIgnorePatterns": ["/node_modules/", "/build/"],
-    "testPathIgnorePatterns": ["/node_modules/", "/build/"],
-    "coverageReporters": ["text", "lcov"]
-  },
-  "dependencies": {
-    "invariant": "^2.2.2"
   }
 }
