@@ -20,75 +20,88 @@ $ yarn add react-mutate
 $ npm install --save react-mutate
 ```
 
-## Simple Example
+## Overview
 
-`react-mutate` asks you to create a JSON map with `displayNames` or function names as keys and React [Higher Order Components](https://reactjs.org/docs/higher-order-components.html) as values. 
-If you haven't seen HOC's before, they're basically just functions that take a React component and then return a different or modified React component.
+React-Mutate is a series of packages that work with each other to let you do the following:
+1. Allow users to create extensions as [React HOC's](https://reactjs.org/docs/higher-order-components.html).
+2. Let them store those extensions as npm modules.
+3. Load them in and then apply them to various nodes in your React virtual DOM.
 
-So for example, we might make something like this:
 
-``` js 
-// A function that takes a React component and returns a modified version.
-const insideHeader = Component => {
-    return props => <h1> <Component {...props}/> </h1>;
-};
+### Building an extension 
 
-// The mutations we got from our users
-const userMutations = {
-    "Text" : insideHeader
-}
-```
-
-Now, we'll wrap our React component in `mutate` and then any item with the `displayName` or `name` `Text` will render with `<h1>`'s.  
-
-``` js 
-// ... other imports
-import { mutate } from "react-mutate";
-
-const Text = ({children}) => <p> {children} </p>;
-
-class MyComponent extends React.Component {
-    render() {
-        return <Text> Hello World! </Text>;
-    }
-}
-
-export default mutate(MyComponent, userMutations); // Wrapping at the end
-```
-
-## Using MutationsProvider
-
-If you maintain a single list of all the mutations (or extensions) that your users have created, it can get tedious to pass that around everywhere, especially if you're not using something like redux. 
-
-So instead, you can use `MutationProvider` which lets you define your mutations at the root of your app and then lets you [magically](https://reactjs.org/docs/context.html) ignore the second argument to `mutate`.
-
-For example:
+A typical extension that your user will write has two files by default. The first is a `package.json` that includes a `mutations` attribute like this:
 
 ``` js
-// MyComponent.js
-const Text = ({children}) => <p> {children} </p>;
-
-class MyComponent extends React.Component {
-    render() {
-        return <Text> Hello World! </Text>;
+/* package.json */
+{
+    /* name, version, description, ect... */
+    "mutations": {
+        "Text": "./makeBold.js"
     }
 }
-
-export default mutate(MyComponent) // userMutations are taken care of by the MutationsProvider
 ```
 
-``` js 
-// index.js
-import { MutationsProvider } from 'react-mutate';
-import MyComponent from "./MyComponent.js";
+This config says what React component the user wants to modify and what file contains the function that does the modifying.
 
-class App extends React.Component {
-    render() {
-        <MutationsProvider mutations={userMutations}>
-            <MyComponent />
-        </MutationsProvider>
-    }
+``` js
+/* makeBold.js */
+export default (Text) => {
+  return <b> <Text/> </b>;
 }
+```
+
+For your users, that's it! 
+
+### Installing user extensions
+Next, you'll integrate this into your app with `react-mutate`. 
+
+Then, on your app, you can use `@react-mutate/loader` to install these npm packages for each user. 
+
+``` js
+import { installMutations } from "@react-mutate/loader";
+
+// Installs a bunch of extensions in some folder for user data
+installMutations(["some", "list", "of", "npm", "modules"], "path/to/save/files"); 
+```
+
+### Loading user extensions
+
+Then later, you can load in those modules with `loadMutations` as a JSON object.
+
+``` js
+import { loadMutations } from "@react-mutate/loader";
+
+const mutations = await loadMutations("path/to/save/files");
+```
+
+### Integrating user extensions into React
+You can wrap your app with a `<MutationsProvider />` and put those mutations you got from `loadMutations` in as a prop like so:
+
+``` js
+import { MutationsProvider } from "@react-mutate/core";
+
+/* ... Somewhere inside your root level React component **/ 
+render() {
+    return (
+        <MutationsProvider mutations={mutations}>
+            <App/>
+        </MutationsProvider>
+    )
+}
+```
+
+### Specifying which items can be extended
+Then, inside your `App` you can specify which components you would like to be extendable with `mutate` like so:
+
+``` js
+// Text.js 
+import { Mutate } from "@react-mutate/core";
+
+// Some React component 
+const Text = ({children}) => <p>{children}</p>
+
+export default mutate(Text);
 ```
 
 ## Mutations vs Extensions
