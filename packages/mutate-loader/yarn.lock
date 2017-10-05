@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@flaque/error-if@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@flaque/error-if/-/error-if-1.0.2.tgz#2486cb4558d28cdd470ae5f4b76fa8d35679a707"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"

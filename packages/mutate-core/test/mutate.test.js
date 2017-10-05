@@ -18,6 +18,13 @@ describe("mutate", () => {
     expect(wrapper.html()).toBe("<h1>test</h1>");
   });
 
+  it("will throw an error if mutate is undefined", () => {
+    expect(() => {
+      const Component = mutate(FakeComponent, undefined);
+      shallow(<Component />);
+    }).toThrow();
+  });
+
   it("will return a different component if that's available", () => {
     const MutatedComponent = () => {
       return () => <p>mutate</p>;

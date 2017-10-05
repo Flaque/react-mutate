@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import invariant from "invariant";
+import errorIf from "@flaque/error-if";
+import is from "@sindresorhus/is";
 
 /**
  * A React HOC that returns a component that the user can mutate.
@@ -14,12 +15,14 @@ function mutate(Component, mutations) {
 
       mutations = mutations || context.mutations;
 
-      invariant(
-        mutations,
-        `mutate() did not find any mutations. 
-          You're recieving this error either because you called mutate() in a component 
-          that wasn't wrapped in a <MutationsProvider/> or because you only gave a single 
-          argument to mutate().`
+      errorIf(
+        !is.object(mutations),
+        `mutate() did not find a mutations object. 
+         You're probably recieving this error either because you called mutate() in a component 
+         that wasn't wrapped in a <MutationsProvider/> or because you only gave a single 
+         argument to mutate().
+         It's also possible to recieve this error if you've passed something that's not an "object"
+         in as "mutations".`
       );
 
       this.name = Component.displayName || Component.name;

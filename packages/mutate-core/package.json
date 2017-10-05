@@ -29,6 +29,7 @@
     "build"
   ],
   "dependencies": {
+    "@flaque/error-if": "^1.0.2",
     "invariant": "^2.2.2"
   },
   "devDependencies": {
