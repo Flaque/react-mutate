@@ -1,0 +1,36 @@
+{
+  "name": "@react-mutate/loader",
+  "version": "0.2.0",
+  "main": "build/index.js",
+  "license": "MIT",
+  "description": "Easily add user-defined extensions into your react application",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-watch": "./node_modules/.bin/jest --watchAll"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.0.0-0 || ^16.0.0-0",
+    "react": "^15.0.0-0 || ^16.0.0-0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flaque/react-mutate.git"
+  },
+  "homepage": "https://github.com/Flaque/react-mutate#readme",
+  "bugs": {
+    "url": "https://github.com/Flaque/react-mutate/issues"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "fs-jetpack": "^1.2.0",
+    "invariant": "^2.2.2",
+    "npm-programmatic": "^0.0.8"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "tmp": "^0.0.33"
+  }
+}
