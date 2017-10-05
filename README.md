@@ -8,6 +8,8 @@ React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The 
 
 **I have 0 idea if this is actually a good idea.** Take everything with a grain of salt. My team and I are testing this out for [our project, Aurora](https://github.com/tundra-code/aurora).
 
+**This is really early in development** We've really only partially tested this out yet, so I would probably not use it in production yet. 
+
 ## Install
 
 ### With yarn
