@@ -1,10 +1,9 @@
 {
   "name": "@react-mutate/core",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "main": "build/index.js",
   "license": "MIT",
-  "description":
-    "Easily add user-defined extensions into your react application",
+  "description": "Easily add user-defined extensions into your react application",
   "scripts": {
     "test": "./node_modules/.bin/jest",
     "test-watch": "./node_modules/.bin/jest --watchAll",
@@ -26,7 +25,9 @@
   "bugs": {
     "url": "https://github.com/Flaque/react-mutate/issues"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "dependencies": {
     "invariant": "^2.2.2"
   },

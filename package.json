@@ -1,25 +1,32 @@
 {
   "name": "react-mutate",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "index.js",
-  "description":
-    "Easily add user-defined extensions into your react application",
+  "description": "Easily add user-defined extensions into your react application",
   "repository": "https://github.com/Flaque/react-mutate.git",
   "author": "@flaque",
   "scripts": {
     "test": "lerna exec npm install && jest",
     "test-watch": "lerna exec npm install && jest --watch",
-    "prepare-release":
-      "git checkout master && git pull --rebase origin master && lerna updated",
+    "prepare-release": "git checkout master && git pull --rebase origin master && lerna updated",
     "release": "npm run prepare-release && lerna publish --exact"
   },
   "license": "MIT",
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "<rootDir>/coverage",
-    "coveragePathIgnorePatterns": ["/node_modules/", "/build/"],
-    "testPathIgnorePatterns": ["/node_modules/", "/build/"],
-    "coverageReporters": ["text", "lcov"]
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/build/"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
   },
   "keywords": [
     "react",
