@@ -10,6 +10,8 @@ React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The 
 
 **This is really early in development** We've really only partially tested this out yet, so I would probably not use it in production yet. 
 
+The API will probably change a lot. This project could be abandoned entirely. North Korea could invade France. We could discover flying pigs in a cave somewhere. 🐷✈️ You never know what's gonna happen. 
+
 ## Install
 
 ### With yarn
