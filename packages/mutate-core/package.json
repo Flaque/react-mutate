@@ -1,6 +1,6 @@
 {
   "name": "@react-mutate/core",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "main": "build/index.js",
   "license": "MIT",
   "description": "Easily add user-defined extensions into your react application",
