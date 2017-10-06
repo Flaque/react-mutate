@@ -3,7 +3,7 @@
 `@react-mutate/core` lets you swap out nodes in React's virtual DOM and contains `mutate` and `MutationsProvider`.
 
 
-## Using `mutate`
+## Using `mutate` 
 
 `react-mutate` asks you to create a JSON map with `displayNames` or function names as keys and React [Higher Order Components](https://reactjs.org/docs/higher-order-components.html) as values. 
 If you haven't seen HOC's before, they're basically just functions that take a React component and then return a different or modified React component.

@@ -73,7 +73,7 @@ installMutations(["some", "list", "of", "npm", "modules"], "path/to/save/files")
 
 ### Loading user extensions
 
-Then later, you can load in those modules with `loadMutations` as a JSON object.
+Then later, you can load in those modules with `loadMutations` as a JSON object. 
 
 ``` js
 import { loadMutations } from "@react-mutate/loader";
