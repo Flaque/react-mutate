@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/003JozN.png" width="350px" />
 </p>
 
-React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The main use case is to allow end-users the ability to write and add extensions to a React application. 
+React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The main use case is to allow end-users the ability to write and add extensions (what we call `mutations`) to a React application. 
 
 ## Disclaimer
 
@@ -17,26 +17,38 @@ The API will probably change a lot. This project could be abandoned entirely. No
 ### With yarn
 
 ``` sh
-$ yarn add react-mutate
+yarn add react-mutate
 ```
 
 ### With npm
 
 ``` sh
-$ npm install --save react-mutate
+npm install --save react-mutate
 ```
 
 ## Overview
 
 React-Mutate is a series of packages that work with each other to let you do the following:
-1. Allow users to create extensions as [React HOC's](https://reactjs.org/docs/higher-order-components.html).
-2. Let them store those extensions as npm modules.
+1. Allow users to create mutations (or extensions/plugins) as [React HOC's](https://reactjs.org/docs/higher-order-components.html).
+2. Let them store those mutations as npm modules.
 3. Load them in and then apply them to various nodes in your React virtual DOM.
 
+## Building a mutation as a user
 
-### Building an extension 
+You should start by creating a new folder with a node project by running the following commands in your [terminal](http://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/).
 
-A typical extension that your user will write has two files by default. The first is a `package.json` that includes a `mutations` attribute like this:
+``` sh
+mkdir MyAwesomeMutation
+cd MyAwesomeMutation
+npm init
+```
+
+Follow the prompts or just press enter until it stops to go with the defaults. 
+
+### Adding `mutations` to your `package.json`
+A basic mutation has two files. The first file, `package.json` was already made for you by `npm init`. 
+
+In that file, you'll add a `mutations` attribute to the JSON like this:
 
 ``` js
 /* package.json */
@@ -48,7 +60,9 @@ A typical extension that your user will write has two files by default. The firs
 }
 ```
 
-This config says what React component the user wants to modify and what file contains the function that does the modifying.
+The `mutations` attribute tells the base app what React nodes you want to change and how you want to change them. The key, `"Text"` is the [`displayName`](https://reactjs.org/docs/react-component.html#displayname) or `name` of the React component / functional component that you want to modify. 
+
+### Adding a mutations file
 
 ``` js
 /* makeBold.js */
