@@ -6,6 +6,10 @@ test("loadMutations exists", () => {
   expect(loadMutations).toBeDefined();
 });
 
+test("installMutations doesn't crash if no mutations are passed in", async () => {
+  await installMutations([], "i-shouldnt-matter"); // If this completes, then we pass
+});
+
 describe("loadMutations", () => {
   const INSTALLED_MODULE = "react-mutate-test-mutation";
   let tmpobj;

@@ -23,6 +23,10 @@ const async = require("async");
  * @return {Promise}
  */
 function installMutations(modules, enclosingFolder) {
+  if (modules.length === 0) {
+    return new Promise(resolve => resolve({}));
+  }
+
   makeFolderLibraryIfNotExist(enclosingFolder);
   return npm.install(modules, {
     cwd: pathToMutations(enclosingFolder),
