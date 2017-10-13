@@ -5,29 +5,22 @@ import is from "@sindresorhus/is";
 
 /**
  * A React HOC that returns a component that the user can mutate.
- * @param {React} Component The component we will mutate
- * @param {Object} mutations A map of React displaynames to objects 
+ * @param {React} Component is the component we will mutate
+ * @param {String} title is the name you want to associate with the mutation
  */
-function mutate(Component, mutations) {
+function mutate(Component, title) {
   class Mutated extends React.Component {
     constructor(props, context) {
       super(props);
 
-      mutations = mutations || context.mutations;
+      const mutations = context.mutations;
+      if (!mutations) {
+        this.ToRender = Component;
+        return;
+      }
 
-      errorIf(
-        !is.object(mutations),
-        `mutate() did not find a mutations object. 
-         You're probably recieving this error either because you called mutate() in a component 
-         that wasn't wrapped in a <MutationsProvider/> or because you only gave a single 
-         argument to mutate().
-         It's also possible to recieve this error if you've passed something that's not an "object"
-         in as "mutations".`
-      );
-
-      this.name = Component.displayName || Component.name;
-      this.ToRender = mutations[this.name]
-        ? mutations[this.name](Component) // Apply HOC function
+      this.ToRender = mutations[title]
+        ? mutations[title](Component) // Apply HOC function
         : Component;
     }
 

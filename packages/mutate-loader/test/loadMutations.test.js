@@ -1,17 +1,30 @@
 const { installMutations, loadMutations } = require("../src/index.js");
 const tmp = require("tmp");
+const isfunction = require("isfunction");
+
+test("loadMutations exists", () => {
+  expect(loadMutations).toBeDefined();
+});
 
 describe("loadMutations", () => {
-  test("it exists", () => {
-    expect(loadMutations).toBeDefined();
+  const INSTALLED_MODULE = "react-mutate-test-mutation";
+  let tmpobj;
+
+  beforeAll(async () => {
+    tmpobj = tmp.dirSync();
+    await installMutations([INSTALLED_MODULE], tmpobj.name);
   });
 
   test("it loads installed mutations", async () => {
-    const tmpobj = tmp.dirSync();
-    const INSTALLED_MODULE = "react-mutate-test-mutation";
-    await installMutations([INSTALLED_MODULE], tmpobj.name);
-
     const mutes = await loadMutations(tmpobj.name);
     expect(mutes[INSTALLED_MODULE]).toBeDefined();
+  });
+
+  test("it loads installed mutations as functions", async () => {
+    const mutes = await loadMutations(tmpobj.name);
+    const firstKey = Object.keys(mutes[INSTALLED_MODULE])[0];
+    const aMutationFunction = mutes[INSTALLED_MODULE][firstKey];
+
+    expect(isfunction(aMutationFunction)).toBe(true);
   });
 });

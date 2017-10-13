@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 class MutationsProvider extends React.Component {
   getChildContext() {
-    return { mutations: this.props.mutations };
+    const mutations = this.props.mutations;
+    return { mutations };
   }
 
   render() {
@@ -13,7 +14,7 @@ class MutationsProvider extends React.Component {
 }
 
 MutationsProvider.propTypes = {
-  mutations: PropTypes.object.isRequired,
+  mutations: PropTypes.object,
   children: PropTypes.element.isRequired
 };
 

@@ -12,6 +12,9 @@ React Mutate is a tool that lets you swap out nodes in React's virtual DOM. The 
 
 The API will probably change a lot. This project could be abandoned entirely. North Korea could invade France. We could discover flying pigs in a cave somewhere. 🐷✈️ You never know what's gonna happen. 
 
+### Double Disclaimer
+A lot of the recent strategies for implementing this have been heavily inspired by how [Hyper](https://github.com/zeit/hyper) does it's extensions (since they also use HOC's as an extension strategy). Hyper is super cool and you should really check it out!
+
 ## Install
 
 ### With yarn
@@ -33,45 +36,22 @@ React-Mutate is a series of packages that work with each other to let you do the
 2. Let them store those mutations as npm modules.
 3. Load them in and then apply them to various nodes in your React virtual DOM.
 
-## Building a mutation as a user
+### Building an extension 
 
-You should start by creating a new folder with a node project by running the following commands in your [terminal](http://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/).
+A typical extension that your user will write can be just one code file. You should name it `index.js` or you can create [a node project with a package.json](https://docs.npmjs.com/cli/init) and then point the [main](https://docs.npmjs.com/files/package.json#main) attribute to be the name of your file. 
 
-``` sh
-mkdir MyAwesomeMutation
-cd MyAwesomeMutation
-npm init
-```
+Your file should export a "mutations" attribute that is an object where the keys are the components you would like to modify and the values are React HOC functions that modify their keys.
 
-Follow the prompts or just press enter until it stops to go with the defaults. 
-
-### Adding `mutations` to your `package.json`
-A basic mutation has two files. The first file, `package.json` was already made for you by `npm init`. 
-
-In that file, you'll add a `mutations` attribute to the JSON like this:
+For example, here, I want to make all the `<Text />` in this application bold. So I'll write an `index.js` file that has a `Text` function that will take in a component and return it wrapped in bold tags.
 
 ``` js
-/* package.json */
-{
-    /* name, version, description, ect... */
-    "mutations": {
-        "Text": "./makeBold.js"
-    }
+/* index.js */
+module.exports.mutations = { 
+    Text: Component => <b> <Component/> </b>
 }
 ```
 
-The `mutations` attribute tells the base app what React nodes you want to change and how you want to change them. The key, `"Text"` is the [`displayName`](https://reactjs.org/docs/react-component.html#displayname) or `name` of the React component / functional component that you want to modify. 
-
-### Adding a mutations file
-
-``` js
-/* makeBold.js */
-export default (Text) => {
-  return <b> <Text/> </b>;
-}
-```
-
-For your users, that's it! 
+Then, once I'm done, I can go and upload it to NPM with `npm publish`. `@react-mutate/loader` can help project owners easily install and load in npm projects as mutations. 
 
 ### Installing user extensions
 Next, you'll integrate this into your app with `react-mutate`. 
@@ -121,7 +101,7 @@ import { Mutate } from "@react-mutate/core";
 // Some React component 
 const Text = ({children}) => <p>{children}</p>
 
-export default mutate(Text);
+export default mutate(Text, "Text");
 ```
 
 ## Mutations vs Extensions

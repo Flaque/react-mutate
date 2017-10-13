@@ -50,4 +50,4 @@ function loadMutations(enclosingFolder) {
   });
 }
 
-export { installMutations, loadMutations };
+module.exports = { installMutations, loadMutations };

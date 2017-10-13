@@ -21,33 +21,4 @@ describe("MutationsProvider", () => {
       </MutationsProvider>
     );
   });
-
-  it("can mutate a child without explicitly passing in mutaitons into mutate", () => {
-    // Example basic mutation
-    const putInHeader = Component => {
-      return props => (
-        <h1>
-          <Component {...props} />
-        </h1>
-      );
-    };
-
-    // Create some text with some mutations
-    const Text = () => <div> Hello There </div>;
-    const MutatedText = mutate(Text);
-
-    // Example mutations list
-    const mutations = {
-      Text: putInHeader
-    };
-
-    // Render with Mutations
-    const wrapper = mount(
-      <MutationsProvider mutations={mutations}>
-        <MutatedText />
-      </MutationsProvider>
-    );
-
-    expect(wrapper.find("h1").length).toBe(1);
-  });
 });

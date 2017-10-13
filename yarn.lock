@@ -2320,6 +2320,10 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
+isfunction@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/isfunction/-/isfunction-0.0.6.tgz#48f98048441eda8ec3fa3b558607b7b41bea2e0c"
+
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"

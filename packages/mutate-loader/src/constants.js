@@ -6,7 +6,7 @@ const PACKAGE_JSON_CONTENT = {
   dependencies: {}
 };
 
-export {
+module.exports = {
   MUTATIONS_FOLDER_NAME,
   PACKAGE_JSON,
   NODE_MODULES,

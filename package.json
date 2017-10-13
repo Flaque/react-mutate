@@ -46,6 +46,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
+    "isfunction": "^0.0.6",
     "jest": "^21.2.1",
     "lerna": "^2.3.1",
     "react": "^16.0.0",
