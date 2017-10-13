@@ -1,6 +1,6 @@
 {
   "name": "@react-mutate/loader",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "src/index.js",
   "license": "MIT",
   "description": "Easily add user-defined extensions into your react application",
