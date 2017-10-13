@@ -20,13 +20,13 @@ A lot of the recent strategies for implementing this have been heavily inspired 
 ### With yarn
 
 ``` sh
-yarn add react-mutate
+yarn add @react-mutate/core @react-mutate/loader
 ```
 
 ### With npm
 
 ``` sh
-npm install --save react-mutate
+npm install --save @react-mutate/core @react-mutate/loader
 ```
 
 ## Overview
