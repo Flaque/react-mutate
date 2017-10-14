@@ -23,11 +23,11 @@ const errorIf = require("@flaque/error-if");
  * @return {Promise}
  */
 function installMutations(modules, enclosingFolder) {
+  makeFolderLibraryIfNotExist(enclosingFolder);
   if (modules.length === 0) {
     return new Promise(resolve => resolve({}));
   }
 
-  makeFolderLibraryIfNotExist(enclosingFolder);
   return npm.install(modules, {
     cwd: pathToMutations(enclosingFolder),
     save: true
