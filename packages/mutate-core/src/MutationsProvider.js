@@ -19,7 +19,8 @@ MutationsProvider.propTypes = {
 };
 
 MutationsProvider.childContextTypes = {
-  mutations: PropTypes.object
+  mutations: PropTypes.object,
+  api: PropTypes.object
 };
 
 export default MutationsProvider;

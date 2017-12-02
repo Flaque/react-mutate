@@ -8,7 +8,7 @@ import is from "@sindresorhus/is";
  * @param {React} Component is the component we will mutate
  * @param {String} title is the name you want to associate with the mutation
  */
-function mutate(Component, title) {
+function mutate(Component, title, api = {}) {
   class Mutated extends React.Component {
     constructor(props, context) {
       super(props);
@@ -20,7 +20,7 @@ function mutate(Component, title) {
       }
 
       this.ToRender = mutations[title]
-        ? mutations[title](Component) // Apply HOC function
+        ? mutations[title](Component, api) // Apply HOC function
         : Component;
     }
 

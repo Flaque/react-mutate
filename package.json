@@ -6,8 +6,7 @@
   "repository": "https://github.com/Flaque/react-mutate.git",
   "author": "@flaque",
   "scripts": {
-    "test": "lerna exec npm install && jest",
-    "test-watch": "lerna exec npm install && jest --watch",
+    "test": "jest",
     "prepare-release": "git checkout master && git pull --rebase origin master && lerna updated",
     "release": "npm run prepare-release && lerna publish --exact"
   },
@@ -51,7 +50,8 @@
     "lerna": "^2.3.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "react-test-renderer": "^16.0.0",
+    "sinon": "^4.1.2"
   },
   "dependencies": {
     "@sindresorhus/is": "^0.2.1"

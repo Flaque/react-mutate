@@ -8,6 +8,7 @@ const { shallow, mount } = Enzyme;
 
 import React from "react";
 import { mutate, MutationsProvider } from "../src/index.js";
+import sinon from "sinon";
 
 const FakeComponent = () => <h1>test</h1>;
 
@@ -54,5 +55,39 @@ describe("mutate", () => {
     );
 
     expect(wrapper.html()).toBe("<p>mutate</p>");
+  });
+
+  it("can call an api function that's passed in via the mutations provider", () => {
+    const spy = sinon.spy();
+    const testAPI = {
+      foo: spy
+    };
+
+    const MutationFunction = (Component, api) => {
+      return class extends React.Component {
+        constructor(props) {
+          super(props);
+          api.foo(); // Call the API
+        }
+
+        render() {
+          return <p>mutate</p>;
+        }
+      };
+    };
+
+    const mutations = {
+      FakeComponent: MutationFunction
+    };
+
+    const MutatedComponent = mutate(FakeComponent, "FakeComponent", testAPI);
+    const wrapper = mount(
+      <MutationsProvider mutations={mutations} api={testAPI}>
+        <MutatedComponent />
+      </MutationsProvider>
+    );
+
+    expect(wrapper.html()).toBe("<p>mutate</p>");
+    expect(spy.called).toBe(true);
   });
 });
