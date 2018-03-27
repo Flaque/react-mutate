@@ -13,15 +13,22 @@ function mutate(Component, title, api = {}) {
     constructor(props, context) {
       super(props);
 
+      this.ToRender = Component;
       const mutations = context.mutations;
-      if (!mutations) {
-        this.ToRender = Component;
+
+      if (!mutations || !mutations[title]) {
         return;
       }
 
-      this.ToRender = mutations[title]
-        ? mutations[title](Component, api) // Apply HOC function
-        : Component;
+      // Convert old style mutations to new style mutations
+      if (!Array.isArray(mutations[title])) {
+        mutations[title] = [mutations[title]];
+      }
+
+      // Apply all mutations to the component
+      for (let mut of mutations[title]) {
+        this.ToRender = mut(this.ToRender, api);
+      }
     }
 
     render() {

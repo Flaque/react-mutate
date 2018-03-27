@@ -57,6 +57,39 @@ describe("mutate", () => {
     expect(wrapper.html()).toBe("<p>mutate</p>");
   });
 
+  it("can apply two different mutations to a component", () => {
+    const BaseComponent = ({ children }) => <span>{children}</span>;
+
+    const FirstMutationFunction = Component => {
+      return ({ children }) => (
+        <p>
+          <Component>{children}</Component>
+        </p>
+      );
+    };
+
+    const SecondMutationFunction = Component => {
+      return ({ children }) => (
+        <b>
+          <Component>{children}</Component>
+        </b>
+      );
+    };
+
+    const mutations = {
+      FakeComponent: [FirstMutationFunction, SecondMutationFunction]
+    };
+
+    const MutatedComponent = mutate(BaseComponent, "FakeComponent");
+    const wrapper = mount(
+      <MutationsProvider mutations={mutations}>
+        <MutatedComponent>hi</MutatedComponent>
+      </MutationsProvider>
+    );
+
+    expect(wrapper.html()).toBe("<b><p><span>hi</span></p></b>");
+  });
+
   it("can call an api function that's passed in via the mutations provider", () => {
     const spy = sinon.spy();
     const testAPI = {
