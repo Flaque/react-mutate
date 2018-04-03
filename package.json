@@ -8,7 +8,8 @@
   "scripts": {
     "test": "jest",
     "prepare-release": "git checkout master && git pull --rebase origin master && lerna updated",
-    "release": "npm run prepare-release && lerna publish --exact"
+    "release": "npm run prepare-release && lerna publish --exact",
+    "bootstrap": "lerna bootstrap"
   },
   "license": "MIT",
   "jest": {
